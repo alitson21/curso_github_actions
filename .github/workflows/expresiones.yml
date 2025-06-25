@@ -17,6 +17,9 @@ on:
         required: true
         default: 'none'
         type: string
+  push:
+    branches:
+      - 'dev'
 env:
   liga_var: 'NBA'
 jobs:
