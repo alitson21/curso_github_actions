@@ -1,0 +1,35 @@
+name: expresiones
+run-name: :¡worflow file de expresiones!
+on:
+  workflow_dispatch:
+    inputs:
+      lenguaje_favorito:
+        description: 'Lenguaje Favorito'
+        default: Python
+        required: true
+        type: choice
+        options:
+          - Python
+          - Java
+          - Go
+      nombre:
+        description: 'tu nombre'
+        required: true
+        default: 'none'
+        type: string
+env:
+  liga_var: 'NBA'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: compilacion
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "compilacion ${{ inputs.nombre }}"
+      - name: verificacion
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Lengrague a usar ${{inputs.lenguaje_favorito}}"
+      - name: compilacion
+        run: echo "compilacion ${{ inputs.nombre || 'none' }}"
+      - name: verificacion
+        run: echo "Lengrague a usar ${{inputs.lenguaje_favorito || 'Python'}} ${{env.liga_var}}"
