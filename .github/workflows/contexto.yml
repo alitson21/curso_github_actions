@@ -1,0 +1,9 @@
+name: Contextos
+run-name: ¡este es el worckflow de contexto!
+on: push
+jobs:
+  check-main:
+    if: ${{ github.ref == 'resfs/heads/main'}}
+    runs-on: ubuntu-latest
+    steps:
+      - run echo "Desplegando en la rama $GITGUB_REF en el repositorio ${{ github.repository}}"
