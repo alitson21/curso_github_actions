@@ -1,0 +1,59 @@
+on: #Acaparará los triggers de este workflow
+	push: #El tipo de trigger: push
+		branches: #Las ramas en las que se activará el workflow
+			- 'main' #Se activará si se hace push en la rama main
+			- 'releases/**' #O en la rama releases y derivados
+		paths: #Serán las rutas que se tendrán en cuenta para activar el workflow
+			- '**.js' #Todos los archivos .js en el repositorio
+
+on: #Acaparará los triggers de este workflow
+	pull_request: #El tipo de trigger: pr
+		types: #Los estados que activarán el trigger
+			- [opened, labeled] #Tomará los estados del PR
+		branches: #Las ramas en las que se activará el workflow
+			- 'releases/**' #En la rama releases y derivados
+		paths: #Serán las rutas que se tendrán en cuenta para activar el workflow
+			- '**.js' #Todos los archivos .js en el repositorio
+
+on: #Acaparará los triggers de este workflow
+	issues: #El tipo de trigger: issues
+		types: #Los estados que activarán el trigger
+			- [opened, edited, closed]
+
+on:
+	issue_comment: 
+		types:  [created, deleted]
+
+on: issue_comment
+jobs:
+	pr_commented:
+		name : PR comment
+		if : ${{ github.event.issue.pull_request }}
+
+
+on: 
+	workflow_dispatch:
+		inputs:
+			alerta:
+				description : 'Nivel'
+				required : true
+				default : medio
+				type : choice
+				option :
+				- bajo
+				- medio
+				- alto
+
+			tags:
+				description : 'Opcional'
+				required : false
+				****type : boolean
+
+			enviroment:
+				description : 'Objetivo'
+				required : true
+				type : string
+
+on:
+	schedule:
+		- cron : '30 5,17 * * *'

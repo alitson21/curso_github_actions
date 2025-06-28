@@ -1,0 +1,40 @@
+name: release-1
+on: 
+  push:
+    branches:
+      - 'dev'
+      - 'release-**'
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: validacion
+        run: echo 'this is a testing validation'
+      - name: testing-1
+        run: echo 'testing 1'
+      - name: testing-2
+        run: echo 'testing 2'
+
+  build:
+    runs-on: ubuntu-latest
+    needs: testing
+    steps:
+      - name: build-1
+        run: echo 'build-1'
+      - name: build-2
+        run: echo 'build 2'
+
+  hola-mundo:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' 
+  
+      - name: execution_script
+        run:  python3 hola_mundo.py
