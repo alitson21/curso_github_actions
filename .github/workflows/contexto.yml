@@ -6,4 +6,4 @@ jobs:
     if: ${{ github.ref == 'resfs/heads/main'}}
     runs-on: ubuntu-latest
     steps:
-      - run echo "Desplegando en la rama $GITGUB_REF en el repositorio ${{ github.repository}}"
+      - run: echo "Desplegando en la rama $GITGUB_REF en el repositorio ${{ github.repository}}"
